@@ -53,9 +53,6 @@ Exibe o menu principal e retorna a opção do usuário.
 main()
 Função principal que executa o sistema de menu interativo.
 
-Como Executar
-Salve o código em um arquivo, por exemplo, estoque_dasa.py.
-
 Execute o arquivo com Python 3:
 
 text
