@@ -1,10 +1,10 @@
 # Challenge-Dynamic
 
-Sistema de Controle de Estoque DASA
-Objetivo
+# Sistema de Controle de Estoque DASA
+Objetivo:
 Este sistema foi desenvolvido para o desafio DASA e tem como objetivo gerenciar o estoque de insumos em diferentes locais, permitindo o registro, atualização e acompanhamento de produtos, quantidades e preços. O sistema também mantém um histórico das principais atividades realizadas.
 
-Funcionalidades
+# Funcionalidades
 Registrar novo produto:
 Permite cadastrar um novo produto no estoque, informando nome, quantidade e preço unitário. O sistema calcula automaticamente o preço total do produto.
 
