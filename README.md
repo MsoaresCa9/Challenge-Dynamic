@@ -1,5 +1,5 @@
-Integrantes: Alexandre Faria, Caio Rossini, Gabriel Danius e Enzo Motta
-RM:558270, 555084, 555747 E 555372
+Integrantes: Alexandre Faria(558270), Caio Rossini(555084), Gabriel Danius(555747) e Enzo Motta (555372)
+
 
 # Challenge-Dynamic
 
