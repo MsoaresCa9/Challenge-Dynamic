@@ -1,5 +1,5 @@
 #  SISTEMA DE CONTROLE DE ESTOQUE E CONSUMO DASA
-Integrantes: Alexandre Faria (RM:558270), Caio Rossini (RM:555084), Gabriel Danius (RM:555747) e Enzo Motta (RM:555372)
+Integrantes: Caio Rossini (RM:555084), Gabriel Danius (RM:555747) e Enzo Motta (RM:555372)
 
 1. Descrição do Problema
 Em unidades de diagnóstico, o controle preciso do consumo diário de insumos (reagentes, descartáveis) é um desafio. A falta de registros detalhados dificulta a gestão de estoque e a previsão de reposição, podendo levar à falta de materiais críticos ou a compras desnecessárias.
