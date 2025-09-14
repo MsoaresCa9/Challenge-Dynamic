@@ -3,8 +3,8 @@
 # RM:558270, 555084, 555747 E 555372
 
 # SISTEMA DE CONTROLE DE ESTOQUE DASA
-# Integrantes: Alexandre Faria, Caio Rossini, Gabriel Danius e Enzo Motta
-# RM:558270, 555084, 555747 E 555372
+# Integrantes: Caio Rossini, Gabriel Danius e Enzo Motta
+# RM:555084, 555747 E 555372
 
 from datetime import datetime, timedelta
 import random
@@ -436,3 +436,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
