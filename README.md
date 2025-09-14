@@ -1,4 +1,4 @@
-SISTEMA DE CONTROLE DE ESTOQUE E CONSUMO DASA
+#  SISTEMA DE CONTROLE DE ESTOQUE E CONSUMO DASA
 Integrantes: Alexandre Faria (RM:558270), Caio Rossini (RM:555084), Gabriel Danius (RM:555747) e Enzo Motta (RM:555372)
 
 1. Descrição do Problema
