@@ -7,7 +7,7 @@ Em unidades de diagnóstico, o controle preciso do consumo diário de insumos (r
 Este projeto propõe uma solução baseada em estruturas de dados e algoritmos clássicos para simular e organizar os dados de consumo, permitindo um controle mais eficiente e a geração de relatórios estratégicos.
 
 2. Como Executar o Código
-Salve o código acima em um arquivo chamado sistema_estoque_dasa.py.
+Salve o código acima em um arquivo chamado ChallengeDynamic.py.
 
 Abra um terminal ou prompt de comando.
 
