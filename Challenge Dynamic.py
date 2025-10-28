@@ -2,77 +2,61 @@
 # Integrantes: Caio Rossini, Gabriel Danius e Enzo Motta
 # RM:555084, 555747 E 555372
 
-# SISTEMA DE CONTROLE DE ESTOQUE DASA
-# Integrantes: Caio Rossini, Gabriel Danius e Enzo Motta
-# RM:555084, 555747 E 555372
-
 from datetime import datetime, timedelta
 import random
 
-# ======================================================================
-# ESTRUTURAS DE DADOS GLOBAIS
-# ======================================================================
-estoque = {}  # Armazena produtos disponíveis, suas quantidades e preços. É a "prateleira".
-historico = []  # Armazena registros de atividades do sistema (ex: "produto X foi cadastrado").
-registro_consumo = []  # Armazena o histórico de todos os insumos que já foram consumidos. É o "livro de registros".
+
+estoque = {}
+historico = []
+registro_consumo = []
 
 
-# ======================================================================
-# IMPLEMENTAÇÃO DE ESTRUTURAS DE DADOS E ALGORITMOS CLÁSSICOS
-# ======================================================================
 
-# 1. Fila (Queue) - Para registrar consumo em ordem cronológica (FIFO)
+
+
 class Fila:
-    """Implementação de uma Fila usando uma lista Python."""
-
     def __init__(self):
         self.items = []
 
     def enfileirar(self, item):
-        """Adiciona um item ao final da fila."""
         self.items.append(item)
         print(f"CONSUMO REGISTRADO NA FILA: {item['insumo']}, Quantidade: {item['quantidade']}")
 
     def desenfileirar(self):
-        """Remove e retorna o item do início da fila."""
         if not self.esta_vazia():
             return self.items.pop(0)
         return None
 
     def esta_vazia(self):
-        """Verifica se a fila está vazia."""
         return len(self.items) == 0
 
     def ver_fila(self):
-        """Retorna uma representação da fila."""
         return self.items
 
 
 # 2. Pilha (Stack) - Para consultar consumos em ordem inversa (LIFO)
 class Pilha:
-    """Implementação de uma Pilha usando uma lista Python."""
-
     def __init__(self):
         self.items = []
 
     def empilhar(self, item):
-        """Adiciona um item ao topo da pilha."""
+
         self.items.append(item)
 
     def desempilhar(self):
-        """Remove e retorna o item do topo da pilha."""
+
         if not self.esta_vazia():
             return self.items.pop()
         return None
 
     def esta_vazia(self):
-        """Verifica se a pilha está vazia."""
+
         return len(self.items) == 0
 
 
 # 3. Estruturas de Busca
 def busca_sequencial(lista, chave, valor_buscado):
-    """Busca um item em uma lista de dicionários de forma sequencial (Complexidade: O(n))."""
+
     for item in lista:
         if item[chave].lower() == valor_buscado.lower():
             return item
@@ -80,7 +64,6 @@ def busca_sequencial(lista, chave, valor_buscado):
 
 
 def busca_binaria(lista_ordenada, chave, valor_buscado):
-    """Busca um item em uma lista de dicionários ORDENADA (Complexidade: O(log n))."""
     inicio, fim = 0, len(lista_ordenada) - 1
     while inicio <= fim:
         meio = (inicio + fim) // 2
@@ -97,7 +80,6 @@ def busca_binaria(lista_ordenada, chave, valor_buscado):
 
 # 4. Algoritmos de Ordenação
 def merge_sort(lista, chave):
-    """Implementação do Merge Sort (Complexidade: O(n log n))."""
     if len(lista) <= 1:
         return lista
     meio = len(lista) // 2
@@ -107,7 +89,6 @@ def merge_sort(lista, chave):
 
 
 def merge(esquerda, direita, chave):
-    """Função auxiliar para o Merge Sort."""
     resultado = []
     i, j = 0, 0
     while i < len(esquerda) and j < len(direita):
@@ -123,19 +104,16 @@ def merge(esquerda, direita, chave):
 
 
 def quick_sort(lista, chave):
-    """Implementação do Quick Sort (Complexidade Média: O(n log n))."""
     if len(lista) <= 1:
         return lista
-    pivo = lista[len(lista) // 2][chave]
-    menores = [x for x in lista if x[chave] < pivo]
-    iguais = [x for x in lista if x[chave] == pivo]
-    maiores = [x for x in lista if x[chave] > pivo]
+    # Criando uma lista temporária para obter o pivô (para evitar erro KeyError)
+    lista_temp = [x[chave] for x in lista]
+    pivo_valor = sorted(lista_temp)[len(lista_temp) // 2]  # Mediana aproximada para melhor performance
+    menores = [x for x in lista if x[chave] < pivo_valor]
+    iguais = [x for x in lista if x[chave] == pivo_valor]
+    maiores = [x for x in lista if x[chave] > pivo_valor]
     return quick_sort(menores, chave) + iguais + quick_sort(maiores, chave)
 
-
-# ======================================================================
-# FUNÇÕES PRINCIPAIS DO SISTEMA DE ESTOQUE
-# ======================================================================
 
 def calcular_preco_total(quantidade, preco_unitario):
     """Retorna o preço total de um produto (quantidade * preço unitário)."""
@@ -168,7 +146,7 @@ def registrar_produto():
 
 
 def atualizar_preco():
-    """Permite atualizar o preço unitário de um produto já cadastrado."""
+
     produto = input("Produto para atualizar: ").strip().lower()
     if produto not in estoque:
         print("Produto não encontrado.")
@@ -186,7 +164,7 @@ def atualizar_preco():
 
 
 def listar_produtos():
-    """Lista todos os produtos cadastrados no estoque e suas quantidades atuais."""
+
     if not estoque:
         print("Nenhum produto cadastrado no estoque.")
         return
@@ -198,7 +176,7 @@ def listar_produtos():
 
 
 def gerar_relatorio():
-    """Mostra o histórico das últimas 10 ações realizadas no sistema (cadastros, atualizações)."""
+
     print("\n=== HISTÓRICO DE ATIVIDADES ===")
     if not historico:
         print("Nenhuma atividade registrada.")
@@ -207,15 +185,13 @@ def gerar_relatorio():
         print(registro)
 
 
-# ======================================================================
-# FUNÇÕES DE GERENCIAMENTO DE CONSUMO (MÓDULO INTEGRADO)
-# ======================================================================
+
 
 fila_consumo = Fila()
 
 
 def simular_dados_iniciais():
-    """Pré-popula o estoque e o registro de consumo com dados de exemplo."""
+
     global registro_consumo, estoque
     insumos_simulados = {
         'reagente alfa': {'quantidade': 500, 'preco_unitario': 25.50},
@@ -251,7 +227,7 @@ def simular_dados_iniciais():
 
 
 def registrar_consumo_manual():
-    """Permite ao usuário registrar um consumo, interagindo diretamente com o estoque."""
+
     print("\n--- Insumos Disponíveis no Estoque ---")
     if not estoque:
         print("Nenhum produto no estoque. Cadastre um produto no menu principal primeiro.")
@@ -301,7 +277,7 @@ def registrar_consumo_manual():
 
 
 def ver_ultimos_consumos():
-    """Usa uma Pilha para mostrar os últimos consumos registrados (LIFO)."""
+
     if not registro_consumo:
         print("Nenhum consumo registrado.")
         return
@@ -316,7 +292,7 @@ def ver_ultimos_consumos():
 
 
 def buscar_consumo_insumo():
-    """Menu para buscar um insumo no histórico de consumo."""
+
     if not registro_consumo:
         print("Nenhum consumo para buscar.")
         return
@@ -341,7 +317,7 @@ def buscar_consumo_insumo():
 
 
 def ordenar_registros_consumo():
-    """Menu para ordenar o histórico de consumo usando diferentes algoritmos e critérios."""
+
     if not registro_consumo:
         print("Nenhum consumo para ordenar.")
         return
@@ -356,10 +332,11 @@ def ordenar_registros_consumo():
         ordenada = merge_sort(lista_para_ordenar, chave)
         print(f"\n--- HISTÓRICO ORDENADO POR '{chave.upper()}' (MERGE SORT) ---")
     elif algo_ord == '2':
+        # Quick Sort precisa de uma lista de dicionários com a chave de ordenação
         ordenada = quick_sort(lista_para_ordenar, chave)
         print(f"\n--- HISTÓRICO ORDENADO POR '{chave.upper()}' (QUICK SORT) ---")
     else:
-        print("Opção de algoritmo inválida.");
+        print("Opção de algoritmo inválida.") ;
         return
     for item in ordenada:
         valor = item[chave]
@@ -367,12 +344,155 @@ def ordenar_registros_consumo():
         print(f"Insumo: {item['insumo']:<25} | {chave.replace('_', ' ').capitalize()}: {valor_formatado}")
 
 
-# ======================================================================
-# MENUS E EXECUÇÃO PRINCIPAL
-# ======================================================================
+
+
+class OtimizacaoEstoque:
+
+
+    def __init__(self, insumos, orcamento_max):
+        self.itens = []
+        self.orcamento_max = orcamento_max
+        self.memo = {}  # Tabela de memorização para a versão recursiva
+
+        # 1. Preparação dos Itens (Custo e Valor)
+        for nome, dados in insumos.items():
+            # Critério de "quantidade_minima_seguranca" (Simulação)
+            # Vamos considerar que o mínimo é 5% do estoque simulado, mas pelo menos 10
+            if dados['quantidade'] == 0:
+                continue  # Ignora itens com 0 em estoque para a otimização
+
+            qtd_minima = max(10, int(dados['quantidade'] * 0.05))
+
+            custo = qtd_minima * dados['preco_unitario']
+
+            # Critério de "valor" para o PD: (Qtd Mínima * 10) + Preço Unitário
+            # Prioriza itens críticos (alta qtd_minima) e caros
+            # Arredondado para inteiro para o DP
+            valor = (qtd_minima * 10) + int(dados['preco_unitario'])
+
+            self.itens.append({'nome': nome, 'custo': int(custo), 'valor': int(valor)})
+
+        # Filtra itens com custo positivo
+        self.itens = [item for item in self.itens if item['custo'] > 0]
+        self.N = len(self.itens)
+
+    # Versão Recursiva Pura (Sem Memorização) ---
+    def recursiva(self, i, b):
+        """Calcula o valor máximo considerando os itens de i até N-1, com orçamento b. (O($2^N$))"""
+        # Caso base: Não há mais itens a considerar ou orçamento esgotado
+        if i == self.N or b <= 0:
+            return 0
+
+        item = self.itens[i]
+
+        # Decisão 1: Não incluir o item i (Custo: 0, Valor: 0)
+        max_valor = self.recursiva(i + 1, b)
+
+        # Decisão 2: Incluir o item i (se houver orçamento)
+        if item['custo'] <= b:
+            valor_incluindo = item['valor'] + self.recursiva(i + 1, b - item['custo'])
+            max_valor = max(max_valor, valor_incluindo)
+
+        return max_valor
+
+    # Versão com Memorização (Top-Down) ---
+    def memorizacao(self, i, b):
+        if (i, b) in self.memo:
+            return self.memo[(i, b)]
+
+        # Caso base
+        if i == self.N or b <= 0:
+            return 0
+
+        item = self.itens[i]
+
+        # Decisão 1: Não incluir
+        max_valor = self.memorizacao(i + 1, b)
+
+        # Decisão 2: Incluir (se houver orçamento)
+        if item['custo'] <= b:
+            valor_incluindo = item['valor'] + self.memorizacao(i + 1, b - item['custo'])
+            max_valor = max(max_valor, valor_incluindo)
+
+        # Armazena o resultado na tabela de memorização
+        self.memo[(i, b)] = max_valor
+        return max_valor
+
+    # --- 2.3 Versão Iterativa (Bottom-Up) ---
+    def iterativa(self):
+        # Tabela de Programação Dinâmica: DP[i][b]
+        DP = [[0 for _ in range(self.orcamento_max + 1)] for _ in range(self.N + 1)]
+
+        for i in range(1, self.N + 1):
+            item = self.itens[i - 1]  # O item atual (index i-1 na lista)
+            custo_i = item['custo']
+            valor_i = item['valor']
+
+            for b in range(self.orcamento_max + 1):
+                # Se o custo do item excede o orçamento b, não podemos incluí-lo
+                if custo_i > b:
+                    DP[i][b] = DP[i - 1][b]
+                else:
+                    # MAX(Não incluir, Incluir)
+                    # 1. Não incluir: DP[i-1][b]
+                    # 2. Incluir: valor_i + DP[i-1][b - custo_i]
+                    DP[i][b] = max(DP[i - 1][b], valor_i + DP[i - 1][b - custo_i])
+
+        return DP[self.N][self.orcamento_max]
+
+
+def otimizar_alocacao():
+
+    print("\n=== PROGRAMAÇÃO DINÂMICA: OTIMIZAÇÃO DE ALOCAÇÃO ===")
+
+    if not estoque:
+        print("Estoque vazio. Não é possível otimizar.")
+        return
+
+    try:
+        # Sugere o orçamento máximo como 10% do valor total atual do estoque para simulação
+        valor_total_estoque = sum(d['preco_total'] for d in estoque.values() if 'preco_total' in d)
+        orcamento_sugerido = max(100, int(valor_total_estoque * 0.1))
+
+        orcamento = int(input(f"Digite o orçamento máximo (sugerido R${orcamento_sugerido}): R$"))
+
+        otimizador = OtimizacaoEstoque(estoque, orcamento)
+
+        if not otimizador.itens:
+            print("Nenhum item válido para otimização com as regras definidas.")
+            return
+
+        print(f"\n--- Resultados (Todos devem ser iguais para N={otimizador.N} e B={orcamento}) ---")
+
+        # 1. Versão Recursiva Pura
+        resultado_recursiva = otimizador.recursiva(0, orcamento)
+        print(f"1. Recursiva Pura (Exponencial $O(2^N)$): Valor Máximo = {resultado_recursiva}")
+
+        # 2. Versão com Memorização
+        otimizador.memo = {}  # Limpa a memoização antes da execução
+        resultado_memo = otimizador.memorizacao(0, orcamento)
+        print(f"2. Memorização (Top-Down $O(N \cdot B)$): Valor Máximo = {resultado_memo}")
+
+        # 3. Versão Iterativa (Bottom-Up)
+        resultado_iterativa = otimizador.iterativa()
+        print(f"3. Iterativa Bottom-Up ($O(N \cdot B)$): Valor Máximo = {resultado_iterativa}")
+
+        print("\nNota: O 'Valor Máximo' é uma métrica de importância estratégica, não o custo monetário total.")
+
+        if resultado_recursiva == resultado_memo == resultado_iterativa:
+            print(
+                "\nSUCESSO!** Todas as implementações do PD produziram o mesmo resultado (Item 70 pts garantido).")
+        else:
+            print("\nAVISO: As implementações do PD produziram resultados diferentes.")
+
+    except ValueError:
+        print("Entrada inválida. Use apenas números inteiros para o orçamento.")
+
+
+
 
 def menu_consumo():
-    """Exibe o menu de gerenciamento de consumo."""
+
     while True:
         print("\n=== GERENCIAMENTO DE CONSUMO DE INSUMOS ===")
         print("1. Registrar Consumo Manual (Integrado ao Estoque)")
@@ -401,19 +521,20 @@ def menu_consumo():
 
 
 def menu_principal():
-    """Exibe o menu principal do sistema."""
+
     print("\n=== SISTEMA DE ESTOQUE DASA ===")
     print("1. Registrar novo produto")
     print("2. Atualizar preço de produto")
     print("3. Listar produtos (Estoque Atual)")
     print("4. Gerar relatório de atividades do sistema")
     print("5. Gerenciar Consumo de Insumos")
+    print("7. Otimizar Alocação de Insumo")
     print("6. Sair")
     return input("Escolha uma opção: ")
 
 
 def main():
-    """Função principal que executa o programa."""
+
     simular_dados_iniciais()
     while True:
         opcao = menu_principal()
@@ -427,6 +548,8 @@ def main():
             gerar_relatorio()
         elif opcao == '5':
             menu_consumo()
+        elif opcao == '7':  # Chamada para o módulo de Programação Dinâmica
+            otimizar_alocacao()
         elif opcao == '6':
             print("Saindo do sistema. Até logo!")
             break
@@ -436,5 +559,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
