@@ -1,9 +1,3 @@
-Compreendido\! Você quer um `README.md` mais dinâmico e amigável para exibição, evitando tabelas markdown que podem não renderizar bem em todas as plataformas ou que você prefere evitar. Vou reestruturar o `README.md` para ser mais fluído e descritivo, usando listas e texto corrido.
-
-Aqui está a nova versão do `README.md`:
-
----
-
 # 📚 SISTEMA DE CONTROLE DE ESTOQUE DASA
 
 **Integrantes:** Caio Rossini, Gabriel Danius e Enzo Motta
