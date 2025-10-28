@@ -1,59 +1,95 @@
-#  SISTEMA DE CONTROLE DE ESTOQUE E CONSUMO DASA
-Integrantes: Caio Rossini (RM:555084), Gabriel Danius (RM:555747) e Enzo Motta (RM:555372)
+Compreendido\! Você quer um `README.md` mais dinâmico e amigável para exibição, evitando tabelas markdown que podem não renderizar bem em todas as plataformas ou que você prefere evitar. Vou reestruturar o `README.md` para ser mais fluído e descritivo, usando listas e texto corrido.
 
-1. Descrição do Problema
-Em unidades de diagnóstico, o controle preciso do consumo diário de insumos (reagentes, descartáveis) é um desafio. A falta de registros detalhados dificulta a gestão de estoque e a previsão de reposição, podendo levar à falta de materiais críticos ou a compras desnecessárias.
+Aqui está a nova versão do `README.md`:
 
-Este projeto propõe uma solução baseada em estruturas de dados e algoritmos clássicos para simular e organizar os dados de consumo, permitindo um controle mais eficiente e a geração de relatórios estratégicos.
+---
 
-2. Como Executar o Código
-Salve o código acima em um arquivo chamado ChallengeDynamic.py.
+# 📚 SISTEMA DE CONTROLE DE ESTOQUE DASA
 
-Abra um terminal ou prompt de comando.
+**Integrantes:** Caio Rossini, Gabriel Danius e Enzo Motta
+**RM:** 555084, 555747 e 555372
 
-Navegue até o diretório onde você salvou o arquivo.
 
-Execute o comando: python sistema_estoque_dasa.py
 
-O programa iniciará, simulará dados de consumo iniciais e exibirá o menu principal.
+## 1. Descrição do Problema
 
-3. Explicação das Estruturas e Algoritmos Utilizados
-3.1. Fila e Pilha
-Fila (Queue)
-Conceito: Uma estrutura de dados do tipo FIFO (First-In, First-Out), onde o primeiro elemento a ser inserido é o primeiro a ser removido. Funciona como uma fila de pessoas em um banco.
+Este projeto aborda o desafio do controle preciso de estoque e da previsão de reposição de insumos em unidades de diagnóstico. A ausência de registros detalhados e uma gestão otimizada pode levar a faltas de materiais críticos ou a compras excessivas e desnecessárias.
 
-Aplicação no Problema: Foi implementada a classe Fila para registrar o consumo diário de insumos. Cada vez que um insumo é consumido, ele é adicionado (enfileirar) ao final da fila. Isso garante que os registros sejam mantidos em ordem cronológica estrita. O registro mais antigo é sempre o que está no início da fila, refletindo a ordem natural dos acontecimentos.
+Nossa solução utiliza **Estruturas de Dados** e **Algoritmos Clássicos** para organizar e processar os dados de consumo. Além disso, introduz um módulo de **Programação Dinâmica** focado na **otimização da alocação orçamentária** para a compra de insumos, garantindo que os recursos sejam utilizados da forma mais eficiente possível para manter o estoque adequado.
 
-Pilha (Stack)
-Conceito: Uma estrutura de dados do tipo LIFO (Last-In, First-Out), onde o último elemento inserido é o primeiro a ser removido. É como uma pilha de pratos.
+## 2. Como Executar o Código
 
-Aplicação no Problema: Foi implementada a classe Pilha para simular consultas que priorizam os dados mais recentes. Na função ver_ultimos_consumos, todos os registros de consumo são inseridos (empilhar) em uma pilha. Em seguida, os itens são removidos (desempilhar) um a um para exibição. O resultado é uma lista de consumos em ordem cronológica inversa, mostrando os eventos mais recentes primeiro, o que é útil para análises gerenciais rápidas.
+Para iniciar o sistema, siga estes passos simples:
 
-3.2. Estruturas de Busca
-Para localizar um insumo específico no grande volume de registros de consumo, foram implementados dois algoritmos de busca.
+1.  Salve o código completo em um arquivo Python, por exemplo, `sistema_estoque_dasa.py`.
+2.  Abra seu terminal ou prompt de comando.
+3.  Navegue até o diretório onde você salvou o arquivo.
+4.  Execute o comando: `python sistema_estoque_dasa.py`
+5.  O programa carregará dados simulados iniciais de estoque e consumo e apresentará o menu principal.
 
-Busca Sequencial
-Conceito: Um algoritmo simples que percorre a lista de dados do início ao fim, um item de cada vez, até encontrar o valor desejado ou chegar ao final da lista. Sua complexidade é O(n).
+---
 
-Aplicação no Problema: A função busca_sequencial é ideal quando não temos garantia de que os dados estão ordenados. Ela permite que o usuário procure por um insumo em qualquer situação, embora seja menos eficiente para grandes volumes de dados.
+## 3. Explicação das Estruturas e Algoritmos Utilizados
 
-Busca Binária
-Conceito: Um algoritmo muito mais eficiente, com complexidade O(logn), que funciona dividindo repetidamente a lista de busca pela metade. Pré-requisito crucial: a lista deve estar ordenada.
+O sistema integra diversas estruturas de dados e algoritmos fundamentais para gerenciar o estoque e o consumo de insumos de forma eficiente.
 
-Aplicação no Problema: A função busca_binaria oferece uma performance superior. No nosso sistema, antes de realizar a busca binária, o programa primeiro ordena a lista de consumo pelo nome do insumo. Isso demonstra a importância da organização dos dados para a eficiência dos algoritmos.
+### 3.1. Estruturas Clássicas
 
-3.3. Algoritmos de Ordenação
-Para organizar os dados de consumo e extrair informações valiosas (ex: qual insumo é mais consumido? quais estão com a validade mais próxima?), implementamos dois algoritmos de ordenação eficientes do tipo "dividir para conquistar".
+* **Fila (Queue - FIFO: First-In, First-Out):**
+    * **Conceito:** Como uma fila de banco, o primeiro a entrar é o primeiro a sair.
+    * **Aplicação:** Utilizada para registrar e visualizar o histórico de consumo de insumos em **ordem estritamente cronológica**. Isso é essencial para entender a sequência de uso. (Acessível via Menu 5, Opção 2).
 
-Merge Sort
-Conceito: Um algoritmo que divide a lista em metades, ordena cada metade recursivamente e, em seguida, mescla (merge) as duas metades ordenadas para formar a lista final. Sua complexidade é garantida em O(nlogn) em todos os casos, mas requer memória auxiliar para a mesclagem.
+* **Pilha (Stack - LIFO: Last-In, First-Out):**
+    * **Conceito:** Pense em uma pilha de pratos, o último prato colocado é o primeiro a ser retirado.
+    * **Aplicação:** Usada para consultar os consumos de forma a priorizar os eventos mais recentes, mostrando-os em **ordem inversa** (do mais novo para o mais antigo). Ideal para análises rápidas sobre o uso recente. (Acessível via Menu 5, Opção 3).
 
-Aplicação no Problema: O merge_sort foi implementado para organizar os registros de consumo por quantidade ou data de validade. Sua estabilidade e performance previsível o tornam uma escolha robusta para a geração de relatórios confiáveis.
+### 3.2. Algoritmos de Busca
 
-Quick Sort
-Conceito: Também um algoritmo de "dividir para conquistar", ele escolhe um elemento como pivô e particiona a lista, colocando elementos menores que o pivô à sua esquerda e maiores à sua direita. O processo é então aplicado recursivamente a cada sub-lista. Sua complexidade média é O(nlogn) e geralmente é mais rápido na prática que o Merge Sort por não exigir memória extra (opera in-place).
+* **Busca Sequencial ($O(n)$):**
+    * **Conceito:** Percorre a lista item por item até encontrar o que busca.
+    * **Aplicação:** Útil para encontrar um insumo específico no histórico de consumo quando a ordem dos dados não é garantida ou para listas pequenas.
 
-Aplicação no Problema: O quick_sort é oferecido como uma alternativa ao Merge Sort para as mesmas tarefas de ordenação. A inclusão de ambos os algoritmos permite comparar na prática duas soluções clássicas e eficientes para o mesmo problema.
+* **Busca Binária ($O(\log n)$):**
+    * **Conceito:** Um método muito mais rápido que divide a lista pela metade repetidamente, mas exige que a lista esteja **ordenada**.
+    * **Aplicação:** Demonstra a eficiência de busca em listas maiores. No sistema, a lista de consumo é primeiro ordenada pelo nome do insumo antes da busca binária ser executada.
 
-4. Conclusão
-Este projeto demonstra como a aplicação de estruturas de dados (Fila, Pilha) e algoritmos fundamentais (Busca Sequencial/Binária, Merge Sort/Quick Sort) pode transformar dados brutos de consumo em um sistema de controle de estoque organizado e funcional. As soluções implementadas não apenas resolvem o problema proposto, mas também fornecem as bases para um sistema escalável e eficiente de gestão de insumos em unidades de diagnóstico.
+### 3.3. Algoritmos de Ordenação
+
+* **Merge Sort ($O(n \log n)$):**
+    * **Conceito:** Divide a lista em partes menores, ordena essas partes e depois as combina. É conhecido por sua performance consistente em todos os cenários.
+    * **Aplicação:** Usado para organizar o histórico de consumo por critérios como **Quantidade Consumida** ou **Data de Validade**, fornecendo relatórios confiáveis e bem estruturados.
+
+* **Quick Sort ($O(n \log n)$ em média):**
+    * **Conceito:** Escolhe um "pivô" e reorganiza a lista em torno dele, recursivamente ordenando as sub-listas. Geralmente mais rápido na prática que o Merge Sort.
+    * **Aplicação:** Oferecido como uma alternativa eficiente ao Merge Sort para as mesmas tarefas de ordenação do histórico de consumo.
+
+
+
+## 4. Programação Dinâmica: Otimização de Alocação de Insumos
+
+Este é um módulo chave que utiliza Programação Dinâmica (PD) para resolver um problema complexo de decisão: **como alocar um orçamento limitado para a compra de insumos de forma a maximizar seu valor estratégico.**
+
+### 4.1. Formulação do Problema 
+
+O problema modelado é uma variação do **Problema da Mochila (Knapsack 0/1)**, adaptado para o controle de estoque do DASA.
+
+* **Objetivo:** Maximizar o "valor estratégico total" dos insumos a serem adquiridos.
+* **Restrição:** Respeitar um **orçamento máximo** pré-definido.
+* **Estados:** Representado por $DP[i][b]$, que é o **valor máximo** que podemos obter ao considerar os **primeiros $i$ insumos** com um **orçamento disponível de $b$**.
+* **Decisões:** Para cada insumo $i$, o sistema decide entre:
+    * **Não Incluir o Insumo:** Mantém o orçamento e o valor dos insumos anteriores.
+    * **Incluir o Insumo:** Se o custo do insumo couber no orçamento, adiciona seu valor e reduz o orçamento.
+* **Função de Transição:** A relação que define o cálculo do valor máximo para um estado atual com base em estados anteriores é:
+    $$DP[i][b] = \max(DP[i-1][b], \text{valor}_i + DP[i-1][b - \text{custo}_i])$$
+    (Onde $\text{custo}_i$ é o preço para garantir a quantidade mínima de segurança do insumo $i$, e $\text{valor}_i$ é uma pontuação de importância estratégica desse insumo).
+* **Função Objetivo:** O resultado final é o valor máximo encontrado em $DP[N][B]$, onde $N$ é o número total de insumos e $B$ é o orçamento máximo.
+
+### 4.2. Implementações e Prova de Equivalência
+O código oferece e compara **três implementações** da solução de Programação Dinâmica, demonstrando as diferentes abordagens para resolver o mesmo problema e provando que todas chegam ao mesmo resultado:
+
+1.  **Versão Recursiva Pura:** Esta é a implementação mais direta da função de transição. Embora conceitualmente clara, sua complexidade de tempo é exponencial ($O(2^N)$), tornando-a impraticável para um grande número de insumos.
+2.  **Versão com Memorização (Top-Down):** Otimiza a versão recursiva armazenando os resultados de subproblemas já resolvidos em um dicionário (tabela de memorização). Isso evita recálculos desnecessários, reduzindo a complexidade para $O(N \cdot B)$.
+3.  **Versão Iterativa (Bottom-Up):** Constrói a solução de forma incremental, preenchendo uma tabela $DP[i][b]$ do menor subproblema para o maior. Esta é a abordagem mais eficiente na prática para PD, mantendo a complexidade de tempo em $O(N \cdot B)$.
+
+**Prova de Equivalência:** No menu de "Otimizar Alocação" (Opção 7), o sistema executa as três versões do algoritmo com os mesmos dados de entrada. Ele então **verifica e reporta se todas as implementações produziram o mesmo resultado**, confirmando a correção e a validade das otimizações aplicadas.
+
